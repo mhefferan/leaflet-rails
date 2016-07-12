@@ -26,15 +26,6 @@ After that, open your application-wide Javascript file (typically `app/assets/ja
 
 At this point, you may skip the first two steps of the [Leaflet Quick Start guide](http://leafletjs.com/examples/quick-start.html) and start at the third step (adding the map `div` to a view).
 
-*Rails 4.1+*
-
-If you are using Rails 4.1+ you will need to open your application-wide CSS file (`app/assets/stylesheets/application.css`) and add the following lines at the top:
-
-```
-//= depend_on_asset "layers.png"
-//= depend_on_asset "layers-2x.png"
-```
-
 
 Version Parity
 ==============
@@ -44,6 +35,9 @@ leaflet-rails tries to keep version parity with leaflet.js. However, this isn't 
 | leaflet-rails  | leaflet.js | Reason |
 | ------------- | ------------- | ------|
 | 0.7.4  | 0.7.3  | Requested in #33 because of large gap between master and rubygems.org.|
+| 0.7.5  | 0.7.5  | leaflet.js 0.7.4 was reverted. |
+| 0.7.6  | ----   | Skipped to sync with upstream. |
+| 0.7.7  | 0.7.7  | Sync version numbers with upstream. |
 
 
 Helpers
@@ -149,7 +143,7 @@ After that, open your application-wide Javascript file (typically `app/assets/ja
 
 Add an AwesomeMarker with the house icon, in blue.
 
-``` 
+```
 {
  :awesome_marker => true,
  :icon => {},
@@ -160,11 +154,11 @@ Add an AwesomeMarker with the house icon, in blue.
 
 Full list of options. All match the same named option in AwesomeMarker except 'name' in this plugin corresponds to 'icon' in AwesomeMarker.
 
-``` 
+```
 {
  :awesome_marker => true,
  :icon => {
-   :name => 'home', 
+   :name => 'home',
    :prefix => 'glyphicon',
    :marker_color => 'blue',
    :iconColor => 'white',
