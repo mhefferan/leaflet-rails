@@ -33,7 +33,6 @@ module Leaflet
       if markers
         markers.each_with_index do |marker, index|
           if marker[:icon]
-<<<<<<< HEAD
             if marker[:awesome_marker]
               icon_settings = prep_awesome_marker_settings(marker[:icon])
               output << "var #{icon_var_name(icon_settings[:name], index)} = L.AwesomeMarkers.icon({icon: '#{icon_settings[:name]}', prefix: '#{icon_settings[:prefix]}', markerColor: '#{icon_settings[:marker_color]}', iconColor:  '#{icon_settings[:icon_color]}', spin: '#{icon_settings[:spin].to_s}', extraClasses: '#{icon_settings[:extra_classes]}'})"
@@ -43,14 +42,7 @@ module Leaflet
             end
             output << "marker = L.marker([#{marker[:latlng][0]}, #{marker[:latlng][1]}], {icon: #{icon_var_name(icon_settings[:name], index)}}).addTo(map)"
           else
-            output << "marker = L.marker([#{marker[:latlng][0]}, #{marker[:latlng][1]}]).addTo(map)"
-=======
-            icon_settings = prep_icon_settings(marker[:icon])
-            output << "var #{icon_settings[:name]}#{index} = L.icon({iconUrl: '#{icon_settings[:icon_url]}', shadowUrl: '#{icon_settings[:shadow_url]}', iconSize: #{icon_settings[:icon_size]}, shadowSize: #{icon_settings[:shadow_size]}, iconAnchor: #{icon_settings[:icon_anchor]}, shadowAnchor: #{icon_settings[:shadow_anchor]}, popupAnchor: #{icon_settings[:popup_anchor]}});"
-            output << "marker = L.marker([#{marker[:latlng][0]}, #{marker[:latlng][1]}], {icon: #{icon_settings[:name]}#{index}}).addTo(map);"
-          else
             output << "marker = L.marker([#{marker[:latlng][0]}, #{marker[:latlng][1]}]).addTo(map);"
->>>>>>> master
           end
           if marker[:popup]
             output << "marker.bindPopup('#{escape_javascript marker[:popup]}');"
@@ -85,14 +77,9 @@ module Leaflet
           attribution: '#{attribution}',
           maxZoom: #{max_zoom},"
 
-<<<<<<< HEAD
-      if options[:subdomains]
-        output << "    subdomains: #{options[:subdomains]},"
-        options.delete( :subdomains )
-=======
+
       if subdomains = options.delete(:subdomains)
         output << "    subdomains: #{subdomains},"
->>>>>>> master
       end
 
       options.each do |key, value|
@@ -131,6 +118,4 @@ module Leaflet
       return settings
     end
   end
-
-
 end
