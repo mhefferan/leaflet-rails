@@ -22,18 +22,11 @@ describe Leaflet::ViewHelpers do
 	      :latlng => [51.52238797921441, -0.08366235665359283],
 	      :zoom => 18
 	  	})
-
-<<<<<<< HEAD
-	  result.should match(/L.tileLayer\('http:\/\/{s}.somedomain\.com\/blabla\/{z}\/{x}\/{y}\.png'/)
-	  result.should match(/attribution: 'Some attribution statement'/)
-	  result.should match(/maxZoom: 18/)
-  end
-=======
 	  expect(result).to match(/L.tileLayer\('http:\/\/{s}.somedomain\.com\/blabla\/{z}\/{x}\/{y}\.png'/)
 	  expect(result).to match(/attribution: 'Some attribution statement'/)
 	  expect(result).to match(/maxZoom: 18/)
   end
-  
+
   it 'should set subdomains if present' do
     result = @view.map(:center => {
 	      :latlng => [51.52238797921441, -0.08366235665359283],
@@ -41,7 +34,7 @@ describe Leaflet::ViewHelpers do
 	  	}, :subdomains => ['otile1', 'otile2'])
     expect(result).to match(/subdomains: \["otile1", "otile2"\]/)
   end
-  
+
   it 'should not set subdomains if nil' do
     result = @view.map(:center => {
 	      :latlng => [51.52238797921441, -0.08366235665359283],
@@ -49,7 +42,6 @@ describe Leaflet::ViewHelpers do
 	  	}, :subdomains => nil)
     expect(result).not_to match(/subdomains:/)
   end
->>>>>>> master
 
   it 'should generate a basic map with the correct latitude, longitude and zoom' do
     result = @view.map(:center => {
@@ -167,7 +159,6 @@ describe Leaflet::ViewHelpers do
     expect(result).to match(/marker\.bindPopup\('Hello!'\)/)
   end
 
-<<<<<<< HEAD
   it 'allows you to define some markers as awesomeMarkers' do
     result = @view.map(:center => {
         :latlng => [51.52238797921441, -0.08366235665359283],
@@ -210,8 +201,6 @@ describe Leaflet::ViewHelpers do
   end
 
 
-=======
->>>>>>> master
   it 'should override the method configuration options if set' do
     result = @view.map(:center => {
 	      :latlng => [51.52238797921441, -0.08366235665359283],
@@ -222,15 +211,9 @@ describe Leaflet::ViewHelpers do
 	  	:max_zoom => 4
 	  	)
 
-<<<<<<< HEAD
-  	  result.should match(/L.tileLayer\('http:\/\/{s}.someotherdomain\.com\/blabla\/{z}\/{x}\/{y}\.png'/)
-  	  result.should match(/attribution: 'Some other attribution text'/)
-  	  result.should match(/maxZoom: 4/)
-=======
   	  expect(result).to match(/L.tileLayer\('http:\/\/{s}.someotherdomain\.com\/blabla\/{z}\/{x}\/{y}\.png'/)
   	  expect(result).to match(/attribution: 'Some other attribution text'/)
   	  expect(result).to match(/maxZoom: 4/)
->>>>>>> master
   end
 
   it 'should pass any configuration options to L.tileLayer if set' do
