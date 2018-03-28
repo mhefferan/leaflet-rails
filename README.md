@@ -9,7 +9,14 @@ To start using the leaflet-rails gem, follow the steps below (assuming you use t
 First, add the following code to your `Gemfile`.
 
 ```ruby
-gem 'leaflet-rails'
+gem 'mydrive-leaflet-rails'
+```
+
+If using bundler with Bundler.require you should specify what to require now we have a branched mydrive-leaflet-rails
+gem
+
+```ruby
+gem 'mydrive-leaflet-rails', require: 'leaflet-rails'
 ```
 
 Then, run `bundle install` from within your project to download the necessary files. Following that, open your application-wide CSS file (`app/assets/stylesheets/application.css`) and add the following line as a comment:
