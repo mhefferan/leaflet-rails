@@ -22,12 +22,11 @@ describe Leaflet::ViewHelpers do
 	      :latlng => [51.52238797921441, -0.08366235665359283],
 	      :zoom => 18
 	  	})
-
 	  expect(result).to match(/L.tileLayer\('http:\/\/{s}.somedomain\.com\/blabla\/{z}\/{x}\/{y}\.png'/)
 	  expect(result).to match(/attribution: 'Some attribution statement'/)
 	  expect(result).to match(/maxZoom: 18/)
   end
-  
+
   it 'should set subdomains if present' do
     result = @view.map(:center => {
 	      :latlng => [51.52238797921441, -0.08366235665359283],
@@ -35,7 +34,7 @@ describe Leaflet::ViewHelpers do
 	  	}, :subdomains => ['otile1', 'otile2'])
     expect(result).to match(/subdomains: \["otile1", "otile2"\]/)
   end
-  
+
   it 'should not set subdomains if nil' do
     result = @view.map(:center => {
 	      :latlng => [51.52238797921441, -0.08366235665359283],
@@ -159,6 +158,48 @@ describe Leaflet::ViewHelpers do
     expect(result).to match(/marker = L\.marker\(\[51.52238797921441, -0.08366235665359283\], \{icon: icon\d+\}\).addTo\(map\)/)
     expect(result).to match(/marker\.bindPopup\('Hello!'\)/)
   end
+
+  it 'allows you to define some markers as awesomeMarkers' do
+    result = @view.map(:center => {
+        :latlng => [51.52238797921441, -0.08366235665359283],
+        :zoom => 18
+    },
+     :markers => [
+       {
+         :awesome_marker => true,
+         :icon => {
+           :name => 'coffee',
+           :marker_color => 'blue'
+         },
+         :latlng => [51.52238797921441, -0.08366235665359283],
+         :popup => 'Hello!'
+       }
+     ])
+    result.should include("var coffee0 = L.AwesomeMarkers.icon({icon: 'coffee', prefix: 'glyphicon', markerColor: 'blue', iconColor:  'white', spin: 'false', extraClasses: ''})")
+    result.should match(/marker = L\.marker\(\[51.52238797921441, -0.08366235665359283\], \{icon: coffee0\}\).addTo\(map\)/)
+    result.should match(/marker\.bindPopup\('Hello!'\)/)
+  end
+
+
+  it 'allows you to define icon name which includes a -' do
+    result = @view.map(:center => {
+        :latlng => [51.52238797921441, -0.08366235665359283],
+        :zoom => 18
+    },
+     :markers => [
+       {
+         :awesome_marker => true,
+         :icon => {
+           :name => 'arrow-up',
+           :marker_color => 'blue'
+         },
+         :latlng => [51.52238797921441, -0.08366235665359283]
+       }
+     ])
+    result.should include("var arrowup0 = L.AwesomeMarkers.icon({icon: 'arrow-up', prefix: 'glyphicon', markerColor: 'blue', iconColor:  'white', spin: 'false', extraClasses: ''})")
+    result.should match(/marker = L\.marker\(\[51.52238797921441, -0.08366235665359283\], \{icon: arrowup0\}\).addTo\(map\)/)
+  end
+
 
   it 'should override the method configuration options if set' do
     result = @view.map(:center => {

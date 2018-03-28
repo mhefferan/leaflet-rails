@@ -9,7 +9,14 @@ To start using the leaflet-rails gem, follow the steps below (assuming you use t
 First, add the following code to your `Gemfile`.
 
 ```ruby
-gem 'leaflet-rails'
+gem 'mydrive-leaflet-rails'
+```
+
+If using bundler with Bundler.require you should specify what to require now we have a branched mydrive-leaflet-rails
+gem
+
+```ruby
+gem 'mydrive-leaflet-rails', require: 'leaflet-rails'
 ```
 
 Then, run `bundle install` from within your project to download the necessary files. Following that, open your application-wide CSS file (`app/assets/stylesheets/application.css`) and add the following line as a comment:
@@ -124,3 +131,50 @@ map(:container_id => "second_map", :center => {
 })
 ```
 
+Awesome Markers
+=======
+
+Using the AwesomeMarkers plugin originally from https://github.com/lvoogdt/Leaflet.awesome-markers
+
+Open your application-wide CSS file (`app/assets/stylesheets/application.css`) and add the following line as a comment, after you've required leaflet:
+
+```
+= require leaflet.awesome-markers
+```
+
+After that, open your application-wide Javascript file (typically `app/assets/javascripts/application.js`) and add the following line after you've required leaflet:
+
+```
+= require leaflet.awesome-markers
+```
+
+Add an AwesomeMarker with the house icon, in blue.
+
+```
+{
+ :awesome_marker => true,
+ :icon => {},
+ :latlng => [51.52238797921441, -0.08366235665359283],
+ :popup => 'Hello!'
+}
+```
+
+Full list of options. All match the same named option in AwesomeMarker except 'name' in this plugin corresponds to 'icon' in AwesomeMarker.
+
+```
+{
+ :awesome_marker => true,
+ :icon => {
+   :name => 'home',
+   :prefix => 'glyphicon',
+   :marker_color => 'blue',
+   :iconColor => 'white',
+   :spin => 'false',
+   :extra_classes => ''
+ },
+ :latlng => [51.52238797921441, -0.08366235665359283],
+ :popup => 'Hello!'
+}
+```
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/axyjo/leaflet-rails/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
